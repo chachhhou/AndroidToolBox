@@ -1,4 +1,17 @@
 <resources>
     <string name="app_name">AndroidToolBox</string>
     <string name="textState">Active state</string>
+    <string name="switchState">Changer de fragment</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello First Fragment</string>
+    <string name="hello_blank_fragment2">Hello Second Fragment</string>
+    <string name="button_first_fragment">SWIPE TO SECOND</string>
+    <string name="buttonLogOut">Log Out</string>
+    <string name="formulaire">Formulaire</string>
+    <string name="dateEditText"></string>
+    <string name="fields_empty"></string>
+    <string name="home_save">Save</string>
+    <string name="infoName">Accès aux informations Android </string>
+
 </resources>

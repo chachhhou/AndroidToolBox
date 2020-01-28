@@ -134,7 +134,7 @@
         app:srcCompat="@color/colorAccent" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/saveButton"
         android:layout_width="79dp"
         android:layout_height="76dp"
         android:background="#00FF0000"
@@ -148,4 +148,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.377"
         app:srcCompat="@color/colorAccent" />
+
+    <Button
+        android:id="@+id/buttonLogOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/buttonLogOut"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.935" />
 </androidx.constraintlayout.widget.ConstraintLayout>
