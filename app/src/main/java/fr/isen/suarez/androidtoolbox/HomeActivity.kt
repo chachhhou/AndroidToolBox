@@ -1,12 +1,12 @@
 package fr.isen.suarez.androidtoolbox
 
-import InformationActivity
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.activity_login.*
+
+
 
 class HomeActivity : AppCompatActivity() {
 
@@ -26,7 +26,7 @@ class HomeActivity : AppCompatActivity() {
         }
 
         permissionButton.setOnClickListener{
-            val intent = Intent(this, InformationActivity::class.java)
+            val intent = Intent(this, PermissionActivity::class.java)
             startActivity(intent)
         }
 

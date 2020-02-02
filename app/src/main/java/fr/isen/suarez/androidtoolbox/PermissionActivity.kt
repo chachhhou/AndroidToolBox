@@ -1,3 +1,5 @@
+package fr.isen.suarez.androidtoolbox
+
 import android.R.attr
 import android.R.attr.bitmap
 import android.app.Activity
@@ -15,13 +17,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import fr.isen.suarez.androidtoolbox.R
-import kotlinx.android.synthetic.main.activity_information.*
+
+
+import kotlinx.android.synthetic.main.activity_permission.*
 import java.io.File
 import java.security.acl.Permission
 import java.util.jar.Manifest
 
 
-class InformationActivity : AppCompatActivity() {
+class PermissionActivity : AppCompatActivity() {
 
     companion object {
         val pictureRequestCode = 1
@@ -30,7 +34,7 @@ class InformationActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_information)
+        setContentView(R.layout.activity_permission)
 
         pictureButton.setOnClickListener {
             onChangePhoto()
@@ -49,7 +53,7 @@ class InformationActivity : AppCompatActivity() {
 
         val intentChooser = Intent.createChooser(galleryIntent, "Choose your picture library")
         intentChooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, arrayOf(cameraIntent))
-        startActivityForResult(intentChooser, InformationActivity.pictureRequestCode)
+        startActivityForResult(intentChooser, PermissionActivity.pictureRequestCode)
     }
 
     fun readContacts() {
@@ -75,7 +79,7 @@ class InformationActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         if(grantResults.isNotEmpty()) {
-            if (requestCode == InformationActivity.contactPermissionRequestCode &&
+            if (requestCode == PermissionActivity.contactPermissionRequestCode &&
                 grantResults[0] == PackageManager.PERMISSION_GRANTED
             ) {
                 readContacts()
@@ -86,7 +90,7 @@ class InformationActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == InformationActivity.pictureRequestCode &&
+        if(requestCode == PermissionActivity.pictureRequestCode &&
             resultCode == Activity.RESULT_OK) {
             if(data?.data != null) { // Gallery
                 pictureButton.setImageURI(data?.data)
