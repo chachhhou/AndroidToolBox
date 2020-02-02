@@ -37,7 +37,7 @@
         app:srcCompat="@color/colorAccent" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/permissionButton"
         android:layout_width="79dp"
         android:layout_height="76dp"
         android:layout_marginTop="252dp"

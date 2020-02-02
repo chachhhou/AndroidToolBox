@@ -1,5 +1,4 @@
 package fr.isen.suarez.androidtoolbox
-
 import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -81,15 +80,15 @@ class SaveActivity : AppCompatActivity() {
     }
 
     fun getAge(year: Int, month: Int, day: Int): Int {
-
         val formatter = SimpleDateFormat("dd/MM/yyyy")
-        val dateString = formatter.format(currentDate)//formater la date en string
-        val components = dateString.split("/")//Tableau de strings qui contient jj/mm/aaaa
+        val dateString = formatter.format(currentDate)
+        val components = dateString.split("/")
 
-        var age = components[2].toInt()- year
-        if(components[1].toInt() < month){
-            age --
-        } else if (components[1].toInt() == month && components[0].toInt()< day ){
+        var age = components[2].toInt() - year
+        if(components[1].toInt() < month) {
+            age--
+        } else if (components[1].toInt() == month &&
+            components[0].toInt() < day){
             age --
         }
         return age

@@ -1,5 +1,6 @@
 package fr.isen.suarez.androidtoolbox
 
+import InformationActivity
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +22,11 @@ class HomeActivity : AppCompatActivity() {
 
         saveButton.setOnClickListener{
             val intent = Intent(this, SaveActivity::class.java)
+            startActivity(intent)
+        }
+
+        permissionButton.setOnClickListener{
+            val intent = Intent(this, InformationActivity::class.java)
             startActivity(intent)
         }
 
@@ -46,3 +52,4 @@ class HomeActivity : AppCompatActivity() {
 
 
 }
+
