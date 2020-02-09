@@ -13,39 +13,6 @@ import com.google.gson.Gson
 import fr.isen.suarez.androidtoolbox.Models.UserModel
 import kotlinx.android.synthetic.main.activity_web_services.*
 
-/*class WebServicesActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_web_services)
-
-        val userApiUrl = "https://randomuser.me/api/?results=20"
-        val queue = Volley.newRequestQueue(this)
-
-        val req = StringRequest(Request.Method.GET, userApiUrl, Response.Listener {
-
-            val gson = Gson()
-            val result = gson.fromJson(it, RandomUserResult::class.java)
-
-
-
-            /*userRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-            userRecyclerView.adapter = UsersAdapter(result.results)*/
-
-            result.results?.let {
-                Log.d("volley", it[0].gender)
-
-            }
-
-
-        }, Response.ErrorListener {
-            Log.d("volley", it.toString())
-        })
-
-        queue.add(req)
-    }
-}*/
-
 class WebServicesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,6 +43,7 @@ class WebServicesActivity : AppCompatActivity() {
                         person.gender = it.gender
                         person.fName = it.name?.first
                         person.lName = it.name?.last
+                        person.eemail = it.email
                         personList.add(person)
 
 

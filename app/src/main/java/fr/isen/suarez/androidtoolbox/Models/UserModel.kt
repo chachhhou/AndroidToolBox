@@ -7,4 +7,6 @@ class UserModel {
     var picture: PictureModel? = null
     var fName: String? = null
     var lName: String? = null
+    var eemail: String? = null
+
 }

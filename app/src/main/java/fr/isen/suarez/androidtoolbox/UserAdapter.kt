@@ -26,6 +26,8 @@ class UsersAdapter(val users: ArrayList<UserModel>): RecyclerView.Adapter<UsersA
     class UserViewHolder(val view: View): RecyclerView.ViewHolder(view) {
         fun bind(user: UserModel) {
             view.userDisplayNameTextView.text = user.fName + " " + user.lName
+            view.genderDisplayName.text = user.gender
+            view.emailDisplayName.text = user.eemail
         }
     }
 }
