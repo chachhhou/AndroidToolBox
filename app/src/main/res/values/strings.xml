@@ -13,5 +13,6 @@
     <string name="fields_empty"></string>
     <string name="home_save">Save</string>
     <string name="infoName">Accès aux informations Android </string>
+    <string name="nameWeb">Activité web service</string>
 
 </resources>

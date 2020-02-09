@@ -30,6 +30,11 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        webServicesButton.setOnClickListener {
+            val intent = Intent(this, WebServicesActivity::class.java)
+            startActivity(intent)
+        }
+
         buttonLogOut.setOnClickListener {
             val userPref = getSharedPreferences(Constants.UserPreferencesName, Context.MODE_PRIVATE)
             val editor = userPref.edit()

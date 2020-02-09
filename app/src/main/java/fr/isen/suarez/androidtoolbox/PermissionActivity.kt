@@ -1,40 +1,51 @@
 package fr.isen.suarez.androidtoolbox
 
+import ContactsAdapter
 import android.R.attr
 import android.R.attr.bitmap
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.provider.MediaStore
 import android.util.Log
+import android.widget.Adapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import fr.isen.suarez.androidtoolbox.R
-
-
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_permission.*
 import java.io.File
 import java.security.acl.Permission
 import java.util.jar.Manifest
 
 
-class PermissionActivity : AppCompatActivity() {
+class PermissionActivity : AppCompatActivity(), LocationListener {
+
+    lateinit var locationManager: LocationManager
 
     companion object {
         val pictureRequestCode = 1
         val contactPermissionRequestCode = 2
+        val gpsPermissionRequestCode = 3
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_permission)
+
+        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
         pictureButton.setOnClickListener {
             onChangePhoto()
@@ -42,6 +53,10 @@ class PermissionActivity : AppCompatActivity() {
 
         requestPermission(android.Manifest.permission.READ_CONTACTS, contactPermissionRequestCode) {
             readContacts()
+        }
+
+        requestPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION, gpsPermissionRequestCode) {
+            startGPS()
         }
     }
 
@@ -57,8 +72,29 @@ class PermissionActivity : AppCompatActivity() {
     }
 
     fun readContacts() {
+        val contactList = ArrayList<ContactModel>()
         val contacts = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null)
-        Log.d("contacts", "${contacts}")
+        while(contacts?.moveToNext() ?: false) {
+            val displayName = contacts?.getString(contacts.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
+            val contactModel = ContactModel()
+            contactModel.displayName = displayName.toString()
+            contactList.add(contactModel)
+        }
+        contactRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        contactRecyclerView.adapter = ContactsAdapter(contactList)
+    }
+
+    @SuppressLint("MissingPermission")
+    fun startGPS() {
+        locationManager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, this, null)
+        val location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+        location?.let {
+            refreshPositionUI(it)
+        }
+    }
+
+    fun refreshPositionUI(location: Location) {
+        locationTextView.text = "Latitude : ${location.latitude} \nLongitude : ${location.longitude}"
     }
 
     fun requestPermission(permissionToRequest: String, requestCode: Int, handler: ()-> Unit) {
@@ -102,4 +138,16 @@ class PermissionActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onLocationChanged(location: Location?) {
+        location?.let {
+            refreshPositionUI(it)
+        }
+    }
+
+    override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
+
+    override fun onProviderEnabled(provider: String?) {}
+
+    override fun onProviderDisabled(provider: String?) {}
 }
